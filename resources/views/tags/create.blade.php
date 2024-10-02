@@ -1,12 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Coders Free')
+@section('title', 'Etiqutas')
 
 @section('content_header')
-    <h1>Crear nueva categoría</h1>
+    <h1>Crear nueva tag</h1>
 @stop
 
 @section('content')
+
 
     @if (session('info'))
         <div class="alert alert-success">
@@ -16,14 +17,13 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('categories.update', $category) }}" method="POST">
+            <form action="{{ route('tags.store') }}" method="POST">
                 @csrf <!-- Necesario para la protección contra CSRF -->
-                @method('PUT') <!-- Indicamos que el método real es PUT -->
 
                 <div class="form-group">
                     <label for="name">Nombre</label>
                     <input type="text" id="name" name="name" class="form-control"
-                        placeholder="Ingrese el nombre de la categoría" value="{{ old('name', $category->name) }}">
+                        placeholder="Ingrese el nombre de la etiqueta" value="{{ old('name') }}">
 
                     @error('name')
                         <span class="text-danger">{{ $message }}</span>
@@ -33,18 +33,28 @@
                 <div class="form-group">
                     <label for="slug">Slug</label>
                     <input type="text" id="slug" name="slug" class="form-control"
-                        placeholder="Ingrese el slug de la categoría" readonly value="{{ old('slug', $category->slug) }}">
+                        placeholder="Ingrese el slug de la etiqueta" readonly value="{{ old('slug') }}">
 
                     @error('slug')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Actualizar categoría</button>
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <select name="color" id="color" class="form-control">
+                        @foreach ($colors as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear tag</button>
             </form>
         </div>
     </div>
 @stop
+
 
 @section('js')
 

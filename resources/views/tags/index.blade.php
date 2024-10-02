@@ -3,7 +3,10 @@
 @section('title', 'Listado de Categorías')
 
 @section('content_header')
+    <a href="{{ route('tags.create') }}" class="btn btn-secondary float-right">Crear Categoría</a>
     <h1>Listado de Categorías</h1>
+
+
 @stop
 
 @section('content')
@@ -14,11 +17,6 @@
         </div>
     @endif
 
-
-
-    <div class="card-header">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary">Crear Categoría</a>
-    </div>
 
     <div class="card">
         <div class="card-body">
@@ -31,18 +29,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($tags as $tag)
                         <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $tag->id }}</td>
+                            <td>{{ $tag->name }}</td>
                             <td width="10px">
-                                <a class="btn btn-primary btn-sm" href="{{ route('categories.edit', $category) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('categories.edit', $tag) }}">
                                     Editar
                                 </a>
                             </td>
 
                             <td width="10px">
-                                <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                                <form action="{{ route('tags.destroy', $tag) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">

@@ -3,7 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\AdminPostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 // Definir la ruta resource para categories sin ->names('categories.index')
-Route::resource('categories', CategoryController::class);
+Route::resource('categories', CategoryController::class)->names('categories');
+Route::resource('tags', TagController::class)->names('tags');;
+Route::resource('posts', AdminPostController::class)->names('admin.posts');;

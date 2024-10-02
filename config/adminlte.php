@@ -154,7 +154,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -321,66 +321,26 @@ return [
             'text' => 'categorias',
             'route' => 'categories.index',
             'icon' => 'fas fa-fw fa-user',
+            'active' => ['categories*']
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Etiquetas',
+            'route' => 'tags.index',
+            'icon' => 'fa fa-fw fa-bookmark',
+            'active' => ['tags*']
         ],
+        ['header' => 'Opciones de blog'],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
+            'text' => 'Lista de post',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-clipboard',
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
+            'text' => 'Crear nuevo post',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-file',
         ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
+
     ],
 
     /*
