@@ -332,12 +332,12 @@ return [
         ['header' => 'Opciones de blog'],
         [
             'text' => 'Lista de post',
-            'url' => '#',
+            'route' => 'AdminPosts.index',
             'icon' => 'fas fa-fw fa-clipboard',
         ],
         [
             'text' => 'Crear nuevo post',
-            'url' => '#',
+            'route' => 'AdminPosts.create',
             'icon' => 'fas fa-fw fa-file',
         ],
 
@@ -495,5 +495,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

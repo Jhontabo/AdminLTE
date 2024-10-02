@@ -25,4 +25,4 @@ require __DIR__ . '/auth.php';
 // Definir la ruta resource para categories sin ->names('categories.index')
 Route::resource('categories', CategoryController::class)->names('categories');
 Route::resource('tags', TagController::class)->names('tags');;
-Route::resource('posts', AdminPostController::class)->names('admin.posts');;
+Route::resource('AdminPosts', AdminPostController::class)->names('AdminPosts');;
