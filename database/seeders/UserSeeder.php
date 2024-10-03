@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
             'email' => 'jhonse.tajumbina@umariana.edu.co',
             'password' => bcrypt('12345678'),
 
-        ]);
+        ])->assignRole('administrador');
+
         User::factory(10)->create();
     }
 }

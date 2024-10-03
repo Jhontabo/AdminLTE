@@ -14,17 +14,16 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
-            $table->text('extract')->default('Sin extracto');
+            $table->string('slug')->unique();  // Aseguramos que el slug sea único
+            $table->text('extract')->nullable();  // Permitir null si no quieres un valor por defecto
             $table->longText('body');
             $table->enum('status', [1, 2])->default(1);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
 
-
+            // Claves foráneas con eliminación en cascada
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
-
 
             $table->timestamps();
         });

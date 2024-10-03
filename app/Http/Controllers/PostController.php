@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -41,19 +42,35 @@ class PostController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:posts',
-            'extract' => 'nullable', // Cambia a 'required' si quieres que sea obligatorio
+            'extract' => 'nullable',
             'body' => 'required',
             'category_id' => 'required',
             'status' => 'required',
+            'tags' => 'required|array',
         ]);
 
-        // Asignar el user_id del usuario autenticado al crear el post
-        $post = new Post($request->all());
-        $post->user_id = Auth::id(); // Asignamos el user_id del usuario autenticado
-        $post->save();
+        // Guarda el post
+        $post = Post::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'extract' => $request->extract,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'status' => $request->status,
+            'user_id' => Auth::id(),
+        ]);
+
+        // Depuración: Ver los tags que se están enviando
+        dd($request->tags);  // Detiene la ejecución y muestra los tags enviados
+
+        // Sincroniza los tags
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('info', 'El post se creó con éxito');
     }
+
+    // Otras funciones del controlador...
+
 
     /**
      * Display the specified resource.

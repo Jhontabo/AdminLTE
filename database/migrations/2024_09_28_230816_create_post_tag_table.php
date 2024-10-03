@@ -12,16 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('post_id'); // Clave foránea para la tabla posts
+            $table->unsignedBigInteger('tag_id');  // Clave foránea para la tabla tags
 
+            // Definir claves foráneas
             $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
             $table->foreign('tag_id')->references('id')->on('tags')->cascadeOnDelete();
 
-            $table->timestamps();
+            // Definir una clave primaria compuesta (post_id y tag_id)
+            $table->primary(['post_id', 'tag_id']);
+
+            $table->timestamps();  // Timestamps opcionales, pero útiles para registrar la fecha de creación/modificación
         });
     }
+
 
     /**
      * Reverse the migrations.

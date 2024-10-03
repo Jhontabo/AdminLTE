@@ -15,8 +15,19 @@ class RolSeeder extends Seeder
     public function run(): void
     {
         //
-        $Rol1 = Role::create(['name' => 'Administrador']);
-        $Rol2 = Role::create(['name' => 'Profesor']);
-        $Rol3 = Role::create(['name' => 'Director']);
+        $admin = Role::create(['name' => 'Administrador']);
+        $profesor = Role::create(['name' => 'Profesor']);
+        $director = Role::create(['name' => 'Director']);
+
+
+        // Crear permisos
+        Permission::create(['name' => 'manage categories']);
+        Permission::create(['name' => 'manage posts']);
+        Permission::create(['name' => 'manage users']);
+
+        // Asignar permisos a roles
+        $admin->givePermissionTo(['manage categories', 'manage posts', 'manage users']);
+        $profesor->givePermissionTo(['manage posts']);
+        $director->givePermissionTo(['manage users']);
     }
 }
