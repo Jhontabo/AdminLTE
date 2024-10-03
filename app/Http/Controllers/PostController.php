@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all(); // O podrías usar paginate() si deseas paginación
+
+
+
+        $posts = Post::latest('id')->paginate(10);
 
         // Retorna la vista con las categorías
         return view('posts.index', compact('posts'));
@@ -23,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+
+        $categories = Category::all(); // Cargar categorías para el select
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -32,12 +39,20 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:posts',
+            'name' => 'required',
+            'slug' => 'required|unique:posts',
+            'extract' => 'nullable', // Cambia a 'required' si quieres que sea obligatorio
+            'body' => 'required',
+            'category_id' => 'required',
+            'status' => 'required',
         ]);
 
-        $post = Post::create($request->all());
+        // Asignar el user_id del usuario autenticado al crear el post
+        $post = new Post($request->all());
+        $post->user_id = Auth::id(); // Asignamos el user_id del usuario autenticado
+        $post->save();
 
-        return redirect()->route('posts.edit', $post)->with('info', 'El post se creó con éxito');
+        return redirect()->route('posts.index')->with('info', 'El post se creó con éxito');
     }
 
     /**
