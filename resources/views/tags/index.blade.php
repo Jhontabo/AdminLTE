@@ -34,7 +34,7 @@
                             <td>{{ $tag->id }}</td>
                             <td>{{ $tag->name }}</td>
                             <td width="10px">
-                                <a class="btn btn-primary btn-sm" href="{{ route('categories.edit', $tag) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('tags.edit', $tag) }}">
                                     Editar
                                 </a>
                             </td>

@@ -11,11 +11,13 @@ class Tag extends Model
 
     protected $fillable = ['name', 'slug', 'colors'];
 
-    public function getRouteKey()
+    // Sobrescribe getRouteKeyName para usar el slug en lugar del id en las rutas
+    public function getRouteKeyName()
     {
-        return $this->slug;
+        return 'slug';
     }
 
+    // Relación muchos a muchos con posts
     public function posts()
     {
         return $this->belongsToMany(Post::class);

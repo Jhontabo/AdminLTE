@@ -332,12 +332,12 @@ return [
         ['header' => 'Opciones de blog'],
         [
             'text' => 'Lista de post',
-            'route' => 'AdminPosts.index',
+            'route' => 'posts.index',
             'icon' => 'fas fa-fw fa-clipboard',
         ],
         [
             'text' => 'Crear nuevo post',
-            'route' => 'AdminPosts.create',
+            'route' => 'posts.create',
             'icon' => 'fas fa-fw fa-file',
         ],
 

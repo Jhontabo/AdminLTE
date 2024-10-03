@@ -12,9 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all(); // O podrías usar paginate() si deseas paginación
-
-        // Retorna la vista con las categorías
+        $categories = Category::all();  // Puedes cambiar a paginate() si deseas paginación
         return view('categories.index', compact('categories'));
     }
 
@@ -31,14 +29,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // Validación
         $request->validate([
-            'name' => 'required',
             'name' => 'required|unique:categories',
-
+            'slug' => 'required|unique:categories',  // Asegúrate de que slug sea único también
         ]);
 
+        // Creación de la categoría
         $category = Category::create($request->all());
-        return redirect()->route('categories.edit', $category)->with('info', 'la categoria se creo con exito');
+
+        return redirect()->route('categories.edit', $category)->with('info', 'La categoría se creó con éxito');
     }
 
     /**
@@ -60,17 +60,18 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  Category $category)
+    public function update(Request $request, Category $category)
     {
+        // Validación
         $request->validate([
-            'name' => 'required',
-            'name' => "required|unique:categories,slug,
-            $category->id"
-
+            'name' => 'required|unique:categories,name,' . $category->id,
+            'slug' => 'required|unique:categories,slug,' . $category->id,
         ]);
 
+        // Actualización de la categoría
         $category->update($request->all());
-        return redirect()->route('categories.edit', $category)->with('info', 'la categoria se actualizo con exito');
+
+        return redirect()->route('categories.edit', $category)->with('info', 'La categoría se actualizó con éxito');
     }
 
     /**
@@ -79,6 +80,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('categories.index')->with('info', 'la categoria se elimino con exito');
+
+        return redirect()->route('categories.index')->with('info', 'La categoría se eliminó con éxito');
     }
 }

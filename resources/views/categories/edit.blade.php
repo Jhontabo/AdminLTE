@@ -3,8 +3,8 @@
 @section('title', 'Coders Free')
 
 @section('content_header')
-    <h1>Crear nueva categoría</h1>
-@stop
+    <h1>Editar categoría</h1> 
+@stop 
 
 @section('content')
 

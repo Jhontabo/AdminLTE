@@ -11,13 +11,13 @@ class Category extends Model
 
     protected $fillable = ['name', 'slug'];
 
-    //Relacion uno a muchos
-
-    public function getRouteKey()
+    // Sobrescribe getRouteKeyName para usar el slug en lugar del id en las rutas
+    public function getRouteKeyName()
     {
-        return $this->slug;
+        return 'slug';
     }
 
+    // Relación uno a muchos con posts
     public function posts()
     {
         return $this->hasMany(Post::class);
