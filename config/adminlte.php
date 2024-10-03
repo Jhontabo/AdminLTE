@@ -292,7 +292,6 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
     'menu' => [
         // Navbar items:
         [
@@ -310,39 +309,44 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+
         [
             'text' => 'Dashboard',
             'url' => 'dashboard',
             'icon' => 'fas fa-fw fa-chart-line',
-
+            'can' => 'view dashboard', // Añadir permisos específicos si es necesario
         ],
-        ['header' => 'Administrador'],
+
         [
-            'text' => 'categorias',
+            'text' => 'Categorias',
             'route' => 'categories.index',
             'icon' => 'fas fa-fw fa-user',
-            'active' => ['categories*']
+            'active' => ['categories*'],
+            'can' => 'manage categories', // Solo se muestra si el usuario tiene permiso para gestionar categorías
         ],
         [
             'text' => 'Etiquetas',
             'route' => 'tags.index',
             'icon' => 'fa fa-fw fa-bookmark',
-            'active' => ['tags*']
+            'active' => ['tags*'],
+            'can' => 'manage tags', // Solo visible para roles con permiso para gestionar etiquetas
         ],
+
         ['header' => 'Opciones de blog'],
+
         [
             'text' => 'Lista de post',
             'route' => 'posts.index',
             'icon' => 'fas fa-fw fa-clipboard',
+            'can' => 'manage posts', // Visible solo para usuarios con permisos de gestión de posts
         ],
         [
             'text' => 'Crear nuevo post',
             'route' => 'posts.create',
             'icon' => 'fas fa-fw fa-file',
+            'can' => 'manage posts', // Visible solo para usuarios con permisos de gestión de posts
         ],
-
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Menu Filters

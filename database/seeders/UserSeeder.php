@@ -19,8 +19,30 @@ class UserSeeder extends Seeder
             'email' => 'jhonse.tajumbina@umariana.edu.co',
             'password' => bcrypt('12345678'),
 
-        ])->assignRole('administrador');
+        ])->assignRole('Admin');
 
-        User::factory(10)->create();
+
+        User::create([
+            'name' => 'Jhon Tajumbina',
+            'email' => 'jhonse.tajumbina@gmail.com',
+            'password' => bcrypt('12345678'),
+
+        ])->assignRole('Profesor');
+
+
+
+        User::create([
+            'name' => 'Sara Macuace',
+            'email' => 'saramacuace@gmail.com',
+            'password' => bcrypt('12345678'),
+
+        ])->assignRole('Director');
+
+
+
+
+        User::factory(10)->create()->each(function ($user) {
+            $user->assignRole('Usuario');
+        });
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class RolSeeder extends Seeder
@@ -14,20 +13,20 @@ class RolSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        $admin = Role::create(['name' => 'Administrador']);
-        $profesor = Role::create(['name' => 'Profesor']);
-        $director = Role::create(['name' => 'Director']);
+        // Verificar si los roles ya existen antes de crearlos
+        $admin = Role::firstOrCreate(['name' => 'Administrador']);
+        $profesor = Role::firstOrCreate(['name' => 'Profesor']);
+        $director = Role::firstOrCreate(['name' => 'Director']);
+        $usuario = Role::firstOrCreate(['name' => 'Usuario']);
 
+        // Verificar si los permisos ya existen antes de crearlos
+        $manageCategories = Permission::firstOrCreate(['name' => 'manage categories']);
+        $managePosts = Permission::firstOrCreate(['name' => 'manage posts']);
+        $manageTags = Permission::firstOrCreate(['name' => 'manage tags']); // Cambiar "Tags" a "tags"
 
-        // Crear permisos
-        Permission::create(['name' => 'manage categories']);
-        Permission::create(['name' => 'manage posts']);
-        Permission::create(['name' => 'manage users']);
-
-        // Asignar permisos a roles
-        $admin->givePermissionTo(['manage categories', 'manage posts', 'manage users']);
-        $profesor->givePermissionTo(['manage posts']);
-        $director->givePermissionTo(['manage users']);
+        // Asignar permisos a roles, asegurando que no se dupliquen
+        $admin->syncPermissions([$manageCategories, $managePosts, $manageTags]);
+        $profesor->syncPermissions([$managePosts]);
+        $director->syncPermissions([$manageTags]);
     }
 }
