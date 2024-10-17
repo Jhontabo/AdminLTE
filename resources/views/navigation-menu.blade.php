@@ -1,13 +1,13 @@
 <nav class="flex items-center justify-between px-6 py-3 border-b border-gray-100">
     <div id="nav-left" class="flex items-center">
-        <a href="{{ route('home') }}">
+        <!-- Cambié 'route('home')' a 'route('posts.index')' para que apunte al blog -->
+        <a href="{{ route('posts.index') }}">
             <x-application-mark />
         </a>
         <div class="ml-10 top-menu">
             <div class="flex space-x-4">
-                <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                    {{ __('menu.home') }}
-                </x-nav-link>
+                <!-- Eliminé la referencia a 'home' porque ya no existe -->
+                <!-- Dejé solo el enlace al blog -->
                 <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                     {{ __('menu.blog') }}
                 </x-nav-link>

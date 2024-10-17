@@ -3,15 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
@@ -33,6 +31,12 @@ class UserResource extends Resource
                 Forms\Components\Select::make('role')
                     ->options(User::ROLES)
                     ->required(),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required(fn($livewire) => $livewire instanceof Pages\CreateUser)
+                    ->minLength(8)
+                    ->maxLength(255)
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state)), // Esto encripta la contraseña directamente
             ]);
     }
 

@@ -2,7 +2,7 @@
 
 
 return [
-    'home' => 'Home',
+    'home' => 'Inicio',
     'blog' => 'Blog',
     'admin' => 'Admin',
     'profile' => 'Profile',

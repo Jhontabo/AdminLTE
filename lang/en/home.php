@@ -3,13 +3,13 @@
 
 return [
 
-    'featured_posts' => 'Featured Posts',
-    'latest_posts' => 'Latest Posts',
-    'more_posts' => 'More Posts',
+    'featured_posts' => 'Posts Destacados',
+    'latest_posts' => 'Ultimos Posts',
+    'more_posts' => 'Mas Posts',
 
     'hero' => [
-        'title' => 'Welcome to',
-        'desc' => 'Best Blog in the universe',
-        'cta' => 'Start Reading'
+        'title' => 'Bienvenido a',
+        'desc' => 'El mejor blog de noticias',
+        'cta' => 'Empezar a leer'
     ]
 ];

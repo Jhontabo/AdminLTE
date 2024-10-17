@@ -5,11 +5,11 @@ return [
     'containing' => 'Containing',
 
     'popular' => 'Popular',
-    'latest' => 'Latest',
-    'oldest' => 'Oldest',
+    'latest' => 'Ultimo',
+    'oldest' => 'Mas antiguo',
 
-    'search' => 'Search',
-    'search_placeholder' => 'Search ...',
-    'recommended_topics' => 'Recommended Topics',
-    'min_read' => 'Min read'
+    'search' => 'Buscar',
+    'search_placeholder' => 'Buscar ...',
+    'recommended_topics' => 'Temas recomendados',
+    'min_read' => 'Minuto de lectura'
 ];
